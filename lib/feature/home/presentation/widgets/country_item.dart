@@ -37,14 +37,17 @@ class CountryItem extends StatelessWidget {
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * .67,),
+                      maxWidth: MediaQuery.of(context).size.width * .6,
+                    ),
                     child: Text(
                       country.countryName,
                       style: theme.textTheme.headline5,
                     ),
                   ),
-                  Text(country.countryShortName,
-                      style: theme.textTheme.bodyText1,),
+                  Text(
+                    country.countryShortName,
+                    style: theme.textTheme.bodyText1,
+                  ),
                 ],
               )
             ],
