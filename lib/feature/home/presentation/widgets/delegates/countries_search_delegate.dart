@@ -44,16 +44,19 @@ class CountriesSearchDelegate extends SearchDelegate {
       return const Center(child: CountriesEmpty());
     }
 
-    return ListView.builder(
-      itemCount: countries.length,
-      itemBuilder: (final _, final i) {
-        return BlocProvider(
-          create: (final _) => sl<HomeBloc>(),
-          child: Builder(
-            builder: (final context) => CountryItem(country: countries[i]),
-          ),
-        );
-      },
+    return Scrollbar(
+      isAlwaysShown: true,
+      child: ListView.builder(
+        itemCount: countries.length,
+        itemBuilder: (final _, final i) {
+          return BlocProvider(
+            create: (final _) => sl<HomeBloc>(),
+            child: Builder(
+              builder: (final context) => CountryItem(country: countries[i]),
+            ),
+          );
+        },
+      ),
     );
   }
 
