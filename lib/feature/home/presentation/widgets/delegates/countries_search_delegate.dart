@@ -41,7 +41,7 @@ class CountriesSearchDelegate extends SearchDelegate {
     final countries = homeBloc.filterCountries(query);
 
     if (countries.isEmpty) {
-      return const CountriesEmpty();
+      return const Center(child: CountriesEmpty());
     }
 
     return ListView.builder(
