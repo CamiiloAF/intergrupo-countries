@@ -1,0 +1,6 @@
+package com.jcamilo.intergrupo
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
