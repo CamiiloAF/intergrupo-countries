@@ -1,0 +1,31 @@
+name: Example workflow for Codecov
+on: [ push ]
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: '3.7'
+    steps:
+      - uses: actions/checkout@master
+      - name: Run test
+        run: flutter test --coverage
+      - name: Install lcov
+        run: sudo apt-get install -y lcov
+      - name: Remove generate files from code coverage report
+        run: lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/generated/*.dart' 'lib/generated/*/*.dart' -o coverage/lcov.info
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage/lcov.icon
+          directory: ./coverage/reports/
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
+          flags: unittests
+          name: codecov-umbrella
+          path_to_write_report: ./coverage/codecov_report.txt
+          verbose: true
